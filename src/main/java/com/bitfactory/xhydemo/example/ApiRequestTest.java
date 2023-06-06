@@ -2,6 +2,7 @@ package com.bitfactory.xhydemo.example;
 
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.asymmetric.SM2;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
@@ -93,6 +94,11 @@ public class ApiRequestTest {
         hashInfo1.setFilename("test1");
         hashInfo1.setFileHash("98df1f1dfb3b1a123c1517912dc70447aa61c6be532ac99de973abb6219e1653");
         list.add(hashInfo1);
+
+        EvidenceHashParam.HashInfo hashInfo2 = new EvidenceHashParam.HashInfo();
+        hashInfo2.setFilename("test1");
+        hashInfo2.setFileHash(this.hash256("1234"));
+        list.add(hashInfo2);
         EvidenceHashParam evidenceHashParam = new EvidenceHashParam();
         evidenceHashParam.setFileLabel("标签");
         evidenceHashParam.setList(list);
@@ -170,6 +176,28 @@ public class ApiRequestTest {
         byte[] bytes = httpResponse.bodyBytes();
         IoUtil.write(Files.newOutputStream(Paths.get("/tmp/" + fileName)),true,bytes);
 //        httpResponse.writeBody("/tmp/" + fileName);
+        httpResponse.close();
+    }
+    /**
+     * 文件hash本地计算
+     * @throws Exception
+     */
+    private String hash256(String data) {
+        return SecureUtil.sha256(data);
+    }
+    /**
+     * 文件hash本地计算
+     * @throws Exception
+     */
+    private String hash256(File file) {
+        return SecureUtil.sha256(file);
+    }
+    /**
+     * 文件hash本地计算
+     * @throws Exception
+     */
+    private String hash256(InputStream inputStream) {
+        return SecureUtil.sha256(inputStream);
     }
 
     /**
