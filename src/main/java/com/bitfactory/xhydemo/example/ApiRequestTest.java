@@ -95,10 +95,11 @@ public class ApiRequestTest {
         hashInfo1.setFileHash("98df1f1dfb3b1a123c1517912dc70447aa61c6be532ac99de973abb6219e1653");
         list.add(hashInfo1);
 
-        EvidenceHashParam.HashInfo hashInfo2 = new EvidenceHashParam.HashInfo();
-        hashInfo2.setFilename("test1");
-        hashInfo2.setFileHash(this.hash256("1234"));
-        list.add(hashInfo2);
+//        EvidenceHashParam.HashInfo hashInfo2 = new EvidenceHashParam.HashInfo();
+//        hashInfo2.setFilename("test1");
+//        // 本地计算hash
+//        hashInfo2.setFileHash(this.hash256("1234"));
+//        list.add(hashInfo2);
         EvidenceHashParam evidenceHashParam = new EvidenceHashParam();
         evidenceHashParam.setFileLabel("标签");
         evidenceHashParam.setList(list);
